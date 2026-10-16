@@ -1,0 +1,21 @@
+{
+  "benchmark": "tau2",
+  "domain": "telecom",
+  "seed": 7,
+  "tau2_bench_commit": "96a3ef92329baf908ffe9dfe188cea34e8701d2a",
+  "note": "Debug slice for a first B0 log. Not a substitute for data/splits/tau2_telecom.json. select and test are empty on purpose.",
+  "parent_manifest": "data/splits/tau2_telecom.json",
+  "manifest_hash": "9cc3c1cb575d79154ddc7e0c794e52a28671ac3e4b85a6bf43ac72cb4ee18ee3",
+  "splits": {
+    "opt": [
+      "[mobile_data_issue]bad_network_preference|bad_vpn|data_usage_exceeded[PERSONA:None]",
+      "[mms_issue]airplane_mode_on|bad_wifi_calling|break_apn_mms_setting|break_app_storage_permission|data_mode_off|data_usage_exceeded|unseat_sim_card|user_abroad_roaming_enabled_off[PERSONA:Hard]"
+    ],
+    "val": [
+      "[mms_issue]airplane_mode_on|bad_network_preference|break_apn_mms_setting[PERSONA:Easy]",
+      "[mms_issue]bad_network_preference|break_apn_mms_setting|break_app_storage_permission|data_usage_exceeded|unseat_sim_card|user_abroad_roaming_disabled_off[PERSONA:Hard]"
+    ],
+    "select": [],
+    "test": []
+  }
+}

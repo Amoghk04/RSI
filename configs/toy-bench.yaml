@@ -1,0 +1,38 @@
+# Zero-cost toy-bench dev config (M3).
+run_id: toy-m3
+workdir: ./runs
+seed: 0
+
+llm:
+  provider: mock
+  base_url: https://openrouter.ai/api/v1
+
+models:
+  agent: { name: mock, temperature: 0.0 }
+  user_sim: { name: mock, temperature: 0.0 }
+  proposer: { name: mock, temperature: 0.0 }
+
+budget:
+  total_dollars: 5.0
+  per_round_dollars: 1.0
+  per_candidate_dollars: 0.5
+
+loop:
+  rounds: 3
+  opt_batch: 3
+  candidates_per_round: 1
+  val_tasks_per_round: 1
+  seeds: [0]
+  patience: 2
+  champion_top_k: 1
+
+strategies:
+  surface: S3
+  diagnoser: { name: d0_none }
+  proposer: { name: toy_oracle }
+  gate: { name: g1_greedy }
+  search: { name: greedy }
+
+benchmark:
+  name: toy_bench
+  splits_manifest: data/splits/toy_bench.json

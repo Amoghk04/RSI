@@ -1,0 +1,28 @@
+                    GNU AFFERO GENERAL PUBLIC LICENSE
+                       Version 3, 19 November 2007
+
+ Copyright (C) 2026 Amogh
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+
+ You should have received a copy of the GNU Affero General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+Commercial licensing: see docs/COMMERCIAL.md. Use of this software in ways
+that are not compatible with AGPL-3.0 requires a separate commercial license
+from the copyright holder.
+
+NOTE: This file is the standard AGPL-3.0 notice placeholder for early
+development. Before the first public release, replace or supplement with the
+full AGPL-3.0 text from https://www.gnu.org/licenses/agpl-3.0.txt and run a
+dependency license audit (docs/LICENSES.md).

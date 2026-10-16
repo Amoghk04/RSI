@@ -1,0 +1,44 @@
+# Prototype defaults — Q-001 resolved 2026-10-15. Verify model slugs on OpenRouter before large runs.
+
+run_id: prototype-dev
+workdir: ./runs
+seed: 7
+
+llm:
+  provider: openrouter
+  base_url: https://openrouter.ai/api/v1
+  # Use :floor for cheapest route, or require_parameters if you need strict temperature support.
+  # api_key: ${OPENROUTER_API_KEY}
+
+models:
+  # One model for all roles in prototype (I8). Swap proposer only in logged experiments.
+  agent: { name: google/gemini-2.5-flash, temperature: 0.0 }
+  user_sim: { name: google/gemini-2.5-flash, temperature: 0.0 }
+  proposer: { name: google/gemini-2.5-flash, temperature: 0.7 }
+
+budget:
+  total_dollars: 50.0          # owner cap for prototype; hard stop
+  per_round_dollars: 4.0
+  per_candidate_dollars: 1.0
+  warn_at_fraction: 0.8
+
+loop:
+  rounds: 12                   # expect to hit budget before patience
+  opt_batch: 4                   # keep small until loop is validated
+  candidates_per_round: 2
+  val_tasks_per_round: 8         # rotating subset when G8 enabled
+  seeds: [0, 1]                  # Q-004: 2 for prototype; 3 at freeze if budget remains
+  patience: 4
+  champion_top_k: 3
+
+strategies:
+  surface: S3
+  diagnoser: { name: d3_contrastive_seed }
+  proposer: { name: p2_reflective, max_edit_chars: 800, max_bullets_touched: 3 }
+  gate: { name: g7_aa_guard, alpha: 0.05, guard_tolerance: 0.05, k_sigma: 1.0 }
+  search: { name: greedy }
+  leakage_linter: { min_literal_len: 12 }
+
+benchmark:
+  name: toy_bench                 # switch to tau2 in experiments/tau2-*.yaml
+  splits_manifest: null

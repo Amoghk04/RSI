@@ -1,0 +1,44 @@
+# Full telecom dev loop on opt/val only. Requires TAU2_BENCH_ROOT + OPENROUTER_API_KEY.
+# champion_audit is false so this command does not score the 325-task select split.
+# Select is a separate finalist step (M9), not part of this run.
+run_id: dev-tau2-telecom-002
+workdir: ./runs/tau2-full
+seed: 7
+
+llm:
+  provider: openrouter
+  base_url: https://openrouter.ai/api/v1
+
+models:
+  agent: { name: google/gemini-2.5-flash, temperature: 0.0 }
+  user_sim: { name: google/gemini-2.5-flash, temperature: 0.0 }
+  proposer: { name: google/gemini-2.5-flash, temperature: 0.7 }
+
+budget:
+  total_dollars: 20.0
+  per_round_dollars: 4.0
+  per_candidate_dollars: 1.0
+
+loop:
+  rounds: 8
+  opt_batch: 4
+  candidates_per_round: 2
+  val_tasks_per_round: 4
+  seeds: [0, 1]
+  patience: 3
+  champion_top_k: 2
+  champion_audit: false
+
+strategies:
+  surface: S3
+  diagnoser: { name: d0_none }
+  proposer: { name: p2_reflective, max_edit_chars: 800, max_bullets_touched: 3 }
+  gate: { name: g7_aa_guard, alpha: 0.05, guard_tolerance: 0.05, k_sigma: 1.0 }
+  search: { name: greedy }
+  leakage_linter: { min_literal_len: 12 }
+
+benchmark:
+  name: tau2
+  domain: telecom
+  splits_manifest: data/splits/tau2_telecom.json
+  use_live_tau2: true

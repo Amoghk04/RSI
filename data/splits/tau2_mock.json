@@ -1,0 +1,22 @@
+{
+  "benchmark": "tau2",
+  "domain": "mock",
+  "version": "0.1.0",
+  "seed": 7,
+  "splits": {
+    "opt": [
+      "create_task_1",
+      "update_task_1"
+    ],
+    "val": [
+      "create_task_1_with_env_assertions"
+    ],
+    "select": [
+      "update_task_with_message_history"
+    ],
+    "test": [
+      "update_task_with_initialization_data"
+    ]
+  },
+  "manifest_hash": "f5fcaffa4ba3751b3095b4b2200b5227b6e5870e29b7ed4ed52058b8bf072d03"
+}

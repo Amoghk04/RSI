@@ -1,0 +1,38 @@
+# CI / local dry-run: mock LLM only (no API spend).
+run_id: ci-mock
+workdir: ./runs/ci
+seed: 0
+
+llm:
+  provider: mock
+  base_url: https://openrouter.ai/api/v1
+
+models:
+  agent: { name: mock, temperature: 0.0 }
+  user_sim: { name: mock, temperature: 0.0 }
+  proposer: { name: mock, temperature: 0.0 }
+
+budget:
+  total_dollars: 1.0
+  per_round_dollars: 0.5
+  per_candidate_dollars: 0.25
+
+loop:
+  rounds: 1
+  opt_batch: 2
+  candidates_per_round: 1
+  val_tasks_per_round: 2
+  seeds: [0]
+  patience: 1
+  champion_top_k: 1
+
+strategies:
+  surface: S1
+  diagnoser: { name: d0_none }
+  proposer: { name: p1_naive }
+  gate: { name: g1_greedy }
+  search: { name: greedy }
+
+benchmark:
+  name: toy_bench
+  splits_manifest: null

@@ -1,0 +1,20 @@
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+runs/
+*.db
+*.sqlite
+.cache/
+llm_cache/
+.DS_Store
+dist/
+build/
+*.egg-info/
+# Upstream checkout. Pin is recorded in the split manifest; do not publish the clone.
+tau2-bench/

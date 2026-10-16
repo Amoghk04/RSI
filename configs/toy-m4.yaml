@@ -1,0 +1,39 @@
+# M4 end-to-end: P2 reflective proposer + G7 gate on toy-bench (mock LLM, $0).
+run_id: toy-m4
+workdir: ./runs
+seed: 42
+
+llm:
+  provider: mock
+  base_url: https://openrouter.ai/api/v1
+
+models:
+  agent: { name: mock, temperature: 0.0 }
+  user_sim: { name: mock, temperature: 0.0 }
+  proposer: { name: mock, temperature: 0.7 }
+
+budget:
+  total_dollars: 5.0
+  per_round_dollars: 2.0
+  per_candidate_dollars: 1.0
+
+loop:
+  rounds: 4
+  opt_batch: 3
+  candidates_per_round: 1
+  val_tasks_per_round: 4
+  seeds: [0, 1]
+  patience: 3
+  champion_top_k: 2
+
+strategies:
+  surface: S3
+  diagnoser: { name: d0_none }
+  proposer: { name: p2_reflective, max_edit_chars: 800, max_bullets_touched: 4 }
+  gate: { name: g7_aa_guard, alpha: 0.05, guard_tolerance: 0.05, k_sigma: 1.0 }
+  search: { name: greedy }
+  leakage_linter: { min_literal_len: 12 }
+
+benchmark:
+  name: toy_bench
+  splits_manifest: data/splits/toy_bench.json

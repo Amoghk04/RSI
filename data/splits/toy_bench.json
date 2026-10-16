@@ -1,0 +1,48 @@
+{
+  "benchmark": "toy_bench",
+  "version": "0.1.0",
+  "seed": 7,
+  "task_defs": {
+    "t1": {
+      "required_token": "TOK-A",
+      "family": "alpha"
+    },
+    "t2": {
+      "required_token": "TOK-B",
+      "family": "alpha"
+    },
+    "t3": {
+      "required_token": "TOK-C",
+      "family": "beta"
+    },
+    "t4": {
+      "required_token": "TOK-A",
+      "family": "beta"
+    },
+    "t5": {
+      "required_token": "TOK-E",
+      "family": "gamma"
+    },
+    "t6": {
+      "required_token": "TOK-F",
+      "family": "gamma"
+    }
+  },
+  "splits": {
+    "opt": [
+      "t1",
+      "t2",
+      "t3"
+    ],
+    "val": [
+      "t4"
+    ],
+    "select": [
+      "t5"
+    ],
+    "test": [
+      "t6"
+    ]
+  },
+  "manifest_hash": "a6840e7887920ac40b6c8655799f7d7d9f2cc611d0641a533c27bbc1fe79b4d3"
+}

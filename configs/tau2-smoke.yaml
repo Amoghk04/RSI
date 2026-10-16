@@ -1,0 +1,43 @@
+# 2–3 live telecom episodes on opt/val. Does not read select.
+# champion_audit false + g0_always: one opt task, then current vs candidate on one val task.
+run_id: live-smoke-tau2-telecom-001
+workdir: ./runs/tau2-live-smoke
+seed: 7
+
+llm:
+  provider: openrouter
+  base_url: https://openrouter.ai/api/v1
+
+models:
+  agent: { name: google/gemini-2.5-flash, temperature: 0.0 }
+  user_sim: { name: google/gemini-2.5-flash, temperature: 0.0 }
+  proposer: { name: google/gemini-2.5-flash, temperature: 0.7 }
+
+budget:
+  total_dollars: 2.0
+  per_round_dollars: 2.0
+  per_candidate_dollars: 1.0
+
+loop:
+  rounds: 1
+  opt_batch: 1
+  candidates_per_round: 1
+  val_tasks_per_round: 1
+  seeds: [0]
+  patience: 3
+  champion_top_k: 2
+  champion_audit: false
+
+strategies:
+  surface: S3
+  diagnoser: { name: d0_none }
+  proposer: { name: p2_reflective, max_edit_chars: 800, max_bullets_touched: 3 }
+  gate: { name: g0_always }
+  search: { name: greedy }
+  leakage_linter: { min_literal_len: 12 }
+
+benchmark:
+  name: tau2
+  domain: telecom
+  splits_manifest: data/splits/tau2_telecom.json
+  use_live_tau2: true
